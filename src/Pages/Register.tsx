@@ -6,7 +6,7 @@ import { inputHelper, toastNotify } from '../Helper';
 import { apiResponse } from '../Interfaces';
 import { useNavigate } from "react-router-dom";
 
-import { SerializedError } from '@reduxjs/toolkit';
+
 
 
 function Register() {

@@ -1,17 +1,25 @@
 import React, { useEffect, useState } from 'react';
 import { Header, Footer } from '../Components/Layout';
-import {  Home, Login, NotFound, Register } from '../Pages';
-import { Router, Route, Routes, BrowserRouter, NavLink } from 'react-router-dom';
+import {  Home, Login, News, NotFound, Register } from '../Pages';
+import { Route, Routes } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../Storage/Redux/store';
 import { userModel } from '../Interfaces';
 import { setLoggedInUser } from "../Storage/Redux/userAuthSlice";
-import jwt_decode, { jwtDecode } from "jwt-decode";
+import { jwtDecode } from "jwt-decode";
+import '../dark-theme.css';
 
 function App() {
   const dispatch = useDispatch();
   const [skip, setSkip] = useState(true);
   const userData = useSelector((state: RootState) => state.userAuthStore);
+
+ /* const [isDarkTheme, setIsDarkTheme] = useState(false);
+
+ /* const toggleTheme = () => {
+    setIsDarkTheme((prev) => !prev);
+    document.body.classList.toggle('dark-theme');
+  };*/
 
   
   useEffect(() => {
@@ -29,6 +37,7 @@ function App() {
           <> 
           <Routes>
             <Route path='/' element={<Home />}> </Route>
+            <Route path='/news' element = {<News/>}> </Route> 
             <Route path='/login' element={<Login />}></Route>
             <Route path='/register' element={<Register />}></Route>
             <Route path='/logout' element = {<Home/>}> </Route>
@@ -44,5 +53,6 @@ function App() {
 export default App;
 
 /*
+<button onClick={toggleTheme}>Toggle Theme</button>
 <Route path='/forecastItemDetails/:forecastItemId' element={<ForecastItemDetails />}> </Route>
 */

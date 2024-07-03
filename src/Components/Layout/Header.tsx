@@ -33,13 +33,13 @@ const Header: React.FC = () => {
       <Navbar bg="dark" data-bs-theme="dark" expand="lg">
         <Container>
           <Nav.Link className="App-link" aria-current="page" href="/">
-            <img src={logo} style={{ height: '40px' }} className="m-1" />
+            <img src={logo} style={{ height: '40px' }} className="m-1" title='Home'/>
           </Nav.Link>
-          <Navbar.Brand href="/">React-Bootstrap</Navbar.Brand>
+          <Navbar.Brand href="/">CyberTechNet</Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="me-auto">
-              <Nav.Link className="App-link" href="/clicker">Контекст</Nav.Link>
+              <Nav.Link className="App-link" href="/news">Новости</Nav.Link>
               <Nav.Link className="App-link" href="/hooks">Хуки обычные</Nav.Link>
               <Nav.Link className="App-link" href="/mui">MUI</Nav.Link>
               <Nav.Link className="App-link" href="/callback">useCallback</Nav.Link>

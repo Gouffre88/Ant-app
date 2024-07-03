@@ -8,7 +8,7 @@ import "bootstrap/dist/js/bootstrap.js";
 import "bootstrap-icons/font/bootstrap-icons.css";
 import store from './Storage/Redux/store';
 import { Provider } from 'react-redux';
-import { ToastContainer, toast } from "react-toastify";
+import { ToastContainer} from "react-toastify";
 
 import "react-toastify/dist/ReactToastify.css";
 
@@ -19,7 +19,7 @@ root.render(
 <Provider store={store}>
     <BrowserRouter>
       <ToastContainer />
-      <App />
+      <App/>
     </BrowserRouter>
   </Provider>
 );
