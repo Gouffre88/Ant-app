@@ -1,9 +1,7 @@
 import React from 'react'
-import { Table } from 'antd'
-import { Row, Col } from 'antd'
-import { PageHeader } from '../Components/Page/Common';
+import { Table, TableProps } from 'antd'
 import { ColumnProps } from 'antd/lib/table';
-
+import { PageHeader } from '../Common';
 
 
 const news = [
@@ -27,10 +25,9 @@ interface NewsItem {
     source: string;
 }
 
-
+const dataSource = news.map(item => ({ ...item, key: item.id }))
 const sourcesList = [...new Set(news.map(item => item.source))];
 const gameList = [...new Set(news.map(item => item.game))];
-
 
 const columns: ColumnProps<NewsItem>[] = [
     {
@@ -57,34 +54,30 @@ const columns: ColumnProps<NewsItem>[] = [
         dataIndex: 'title',
         key: 'title',
     },
-    
     {
         title: 'Источник',
         dataIndex: 'source',
         key: 'source',
+        showSorterTooltip: { target: 'full-header' },
         filters: sourcesList.map(source => ({ text: source, value: source })),
-        onFilter: (value, record: NewsItem) => {
-            if (typeof value === 'string') {
-                return record.source.includes(value);
-            } else {
-                return false;
-            }
-        },
+        onFilter: (value, record) => record.source.indexOf(value as string) === 0,
     },
 ];
+
+const onChange: TableProps<NewsItem>['onChange'] = (pagination, filters, sorter, extra) => {
+    console.log('params', pagination, filters, sorter, extra);
+};
 
 function News() {
     return (
         <>
             <PageHeader pageTitle="Новости в мире киберспорта" />
-            <Row>
-                <Col xs={24} md={{span: 16, offset: 4}}>
-                    <Table<NewsItem>
-                        dataSource={news}
-                        columns={columns}
-                    />
-                </Col>
-            </Row>
+            <Table<NewsItem>
+                dataSource={dataSource}
+                columns={columns}
+                onChange={onChange}
+                pagination = {{ pageSize: 5}}
+                showSorterTooltip={{ target: 'sorter-icon' }} />
         </>
     )
 }

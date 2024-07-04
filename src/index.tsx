@@ -19,7 +19,9 @@ root.render(
 <Provider store={store}>
     <BrowserRouter>
       <ToastContainer />
+      <React.StrictMode>
       <App/>
+      </React.StrictMode>
     </BrowserRouter>
   </Provider>
 );

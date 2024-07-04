@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Header, Footer } from '../Components/Layout';
-import {  Home, Login, News, NotFound, Register } from '../Pages';
+import {  Home, Login,  NotFound, Register } from '../Pages';
 import { Route, Routes } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../Storage/Redux/store';
@@ -8,6 +8,7 @@ import { userModel } from '../Interfaces';
 import { setLoggedInUser } from "../Storage/Redux/userAuthSlice";
 import { jwtDecode } from "jwt-decode";
 import '../dark-theme.css';
+import News from '../Components/Page/News/News';
 
 function App() {
   const dispatch = useDispatch();
@@ -37,7 +38,6 @@ function App() {
           <> 
           <Routes>
             <Route path='/' element={<Home />}> </Route>
-            <Route path='/news' element = {<News/>}> </Route> 
             <Route path='/login' element={<Login />}></Route>
             <Route path='/register' element={<Register />}></Route>
             <Route path='/logout' element = {<Home/>}> </Route>

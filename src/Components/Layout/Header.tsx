@@ -6,17 +6,16 @@ import { userModel } from '../../Interfaces';
 
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from "../../Storage/Redux/store";
-import userInterface from '../../Interfaces/userInterface';
+
 import { useNavigate } from 'react-router-dom';
 import { emptyUserState, setLoggedInUser } from '../../Storage/Redux/userAuthSlice';
+
 
 let logo = require("../../Assets/Images/logo.png");
 
 const Header: React.FC = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  
-  const [user, setUser] = useState<userInterface | null>(null);
 
   const userData: userModel = useSelector(
     (state: RootState) => state.userAuthStore
@@ -39,7 +38,12 @@ const Header: React.FC = () => {
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="me-auto">
-              <Nav.Link className="App-link" href="/news">Новости</Nav.Link>
+          
+              <NavDropdown title='AdminPanel' id="basic-nav-dropdown">
+                <NavDropdown.Item className="App-link" href="/games">Games</NavDropdown.Item>
+                <NavDropdown.Item className="App-link" href="/tournament">Tournament</NavDropdown.Item>
+              </NavDropdown>
+
               <Nav.Link className="App-link" href="/hooks">Хуки обычные</Nav.Link>
               <Nav.Link className="App-link" href="/mui">MUI</Nav.Link>
               <Nav.Link className="App-link" href="/callback">useCallback</Nav.Link>
