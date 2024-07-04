@@ -3,7 +3,7 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 const gameItemApi = createApi({
     reducerPath: "gameItemApi",
     baseQuery: fetchBaseQuery({
-      baseUrl: "https://localhost:7050/",
+      baseUrl: "https://localhost:7152/",
     /*  prepareHeaders: (headers: Headers, api) => {
         const token = localStorage.getItem("token");
         token && headers.append("Authorization", "Bearer " + token);
@@ -13,7 +13,7 @@ const gameItemApi = createApi({
     endpoints: (builder) => ({
       getGameItems: builder.query({
         query: () => ({
-          url: "GameType",
+          url: "api/GameType",
         }),
         providesTags: ["GameItems"],
       }),
@@ -25,7 +25,7 @@ const gameItemApi = createApi({
       }),
       createGameItem: builder.mutation({
         query: (data) => ({
-          url: "GameType",
+          url: "api/GameType",
           method: "POST",
           body: data,
         }),
@@ -33,7 +33,7 @@ const gameItemApi = createApi({
       }),
       updateGameItem: builder.mutation({
         query: ({ data, id }) => ({
-          url: "GameType/" + id,
+          url: "api/GameType/" + id,
           method: "PUT",
           body: data,
         }),
@@ -41,7 +41,7 @@ const gameItemApi = createApi({
       }),
       deleteGameItem: builder.mutation({
         query: (id) => ({
-          url: "GameType/" + id,
+          url: "api/GameType/" + id,
           method: "DELETE",
         }),
         invalidatesTags: ["GameItems"],

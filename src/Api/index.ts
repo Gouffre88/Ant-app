@@ -1,4 +1,4 @@
 import authApi from "./authApi";
-import gameItemApi from "./gameApi";
+import gameItemApi from "./gameItemApi";
 
 export {authApi, gameItemApi}

@@ -5,7 +5,7 @@ import { Divider } from 'antd';
 const { Title } = Typography;
 
 
-function PageHeader(props: { pageTitle: string }) {
+function TopicHeader(props: { pageTitle: string }) {
     return (
         <>
             <Divider orientation="left">
@@ -15,4 +15,4 @@ function PageHeader(props: { pageTitle: string }) {
     )
 }
 
-export default PageHeader;
+export default TopicHeader;

@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Card, Button, Dropdown, Menu, Col, Row, Carousel, Spin } from 'antd';
 
 import { gameItemModel } from '../../../Interfaces';
-import { useGetGameItemsQuery } from '../../../Api/gameApi';
+import { useGetGameItemsQuery } from '../../../Api/gameItemApi';
 import { setGameItem } from '../../../Storage/Redux/gameItemSlice';
 import GameItemCard from './GameItemCard';
 import GameItemCarousel from './GameItemsCarousel';

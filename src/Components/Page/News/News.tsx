@@ -1,7 +1,7 @@
 import React from 'react'
 import { Table, TableProps } from 'antd'
 import { ColumnProps } from 'antd/lib/table';
-import { PageHeader } from '../Common';
+import { TopicHeader } from '../Common';
 
 
 const news = [
@@ -71,7 +71,7 @@ const onChange: TableProps<NewsItem>['onChange'] = (pagination, filters, sorter,
 function News() {
     return (
         <>
-            <PageHeader pageTitle="Новости в мире киберспорта" />
+            <TopicHeader pageTitle="Новости в мире киберспорта" />
             <Table<NewsItem>
                 dataSource={dataSource}
                 columns={columns}

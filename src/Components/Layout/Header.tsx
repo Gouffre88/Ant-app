@@ -40,9 +40,11 @@ const Header: React.FC = () => {
             <Nav className="me-auto">
           
               <NavDropdown title='AdminPanel' id="basic-nav-dropdown">
-                <NavDropdown.Item className="App-link" href="/games">Games</NavDropdown.Item>
+                <NavDropdown.Item className="App-link" href="/gameitems">GamesItems</NavDropdown.Item>
                 <NavDropdown.Item className="App-link" href="/tournament">Tournament</NavDropdown.Item>
               </NavDropdown>
+
+              
 
               <Nav.Link className="App-link" href="/hooks">Хуки обычные</Nav.Link>
               <Nav.Link className="App-link" href="/mui">MUI</Nav.Link>

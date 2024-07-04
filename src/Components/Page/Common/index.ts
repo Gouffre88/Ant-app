@@ -1,5 +1,5 @@
-import PageHeader from "./PageHeader";
+import TopicHeader from "./TopicHeader";
 import MainLoader from "./MainLoader";
 
 
-export { MainLoader, PageHeader };
+export { MainLoader, TopicHeader };
