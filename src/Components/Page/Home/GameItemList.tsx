@@ -39,15 +39,15 @@ const GameItemList = () => {
   return (
     <div>
     
-      {/* <div className="container" style={{ display: 'flex', justifyContent: 'center', flexWrap: 'wrap', gap: '32px' }}>
+      { <div className="container" style={{ display: 'flex', justifyContent: 'center', flexWrap: 'wrap', gap: '32px' }}>
         {gameItems.map((gameItem: gameItemModel, index: number) => (
           <div key={index}>
             <GameItemCard gameItem={gameItem} />
           </div>
         ))}
-      </div> */}
+      </div> }
       <div>
-        <GameItemCarousel gameItem={gameItems} />
+        {/* <GameItemCarousel gameItem={gameItems} /> */}
       </div>
     </div>
   );

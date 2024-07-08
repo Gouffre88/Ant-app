@@ -1,7 +1,7 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
-const gameItemApi = createApi({
-    reducerPath: "gameItemApi",
+const newsItemsApi = createApi({
+    reducerPath: "newsApi",
     baseQuery: fetchBaseQuery({
       baseUrl: "https://localhost:7152/",
     /*  prepareHeaders: (headers: Headers, api) => {
@@ -9,51 +9,51 @@ const gameItemApi = createApi({
         token && headers.append("Authorization", "Bearer " + token);
       },*/
     }),
-    tagTypes: ["GameItems"],
+    tagTypes: ["InfoItems"],
     endpoints: (builder) => ({
-      getGameItems: builder.query({
+      getNews: builder.query({
         query: () => ({
-          url: "api/GameType",
+          url: "api/Info",
         }),
-        providesTags: ["GameItems"],
+        providesTags: ["InfoItems"],
       }),
-      getGameItemById: builder.query({
+      getNewsItemId: builder.query({
         query: (id) => ({
-          url: `api/GameType/${id}`,
+          url: `api/Info/${id}`,
         }),
-        providesTags: ["GameItems"],
+        providesTags: ["InfoItems"],
       }),
-      createGameItem: builder.mutation({
+      createNewsItem: builder.mutation({
         query: (data) => ({
-          url: "api/GameType",
+          url: "api/Info",
           method: "POST",
           body: data,
         }),
-        invalidatesTags: ["GameItems"],
+        invalidatesTags: ["InfoItems"],
       }),
-      updateGameItem: builder.mutation({
+      updateNewsItem: builder.mutation({
         query: ({ data, id }) => ({
-          url: "api/GameType/" + id,
+          url: "api/Info/" + id,
           method: "PUT",
           body: data,
         }),
-        invalidatesTags: ["GameItems"],
+        invalidatesTags: ["InfoItems"],
       }),
       deleteGameItem: builder.mutation({
         query: (id) => ({
-          url: "api/GameType/" + id,
+          url: "api/Info/" + id,
           method: "DELETE",
         }),
-        invalidatesTags: ["GameItems"],
+        invalidatesTags: ["InfoItems"],
       }),
     }),
   });
   
   export const {
-    useGetGameItemsQuery,
-    useGetGameItemByIdQuery,
-    useCreateGameItemMutation,
-    useUpdateGameItemMutation,
+    useGetNewsQuery,
+    useGetNewsItemIdQuery,
+    useCreateNewsItemMutation,
+    useUpdateNewsItemMutation,
     useDeleteGameItemMutation,
-  } = gameItemApi;
-  export default gameItemApi;
+  } = newsItemsApi;
+  export default newsItemsApi;

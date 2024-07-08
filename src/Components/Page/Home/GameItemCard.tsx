@@ -36,8 +36,10 @@ import { Card } from "antd";
             cover={
               <img
                 alt="example"
-                src={props.gameItem.image || 'https://os.alipayobjects.com/rmsportal/QBnOOoLaAfKPirc.png'}
+                src={props.gameItem.imageId ? `https://localhost:7152/api/storage/${props.gameItem.imageId}`
+                : require("../../../Assets/Images/nocontent.png")}
                // style={{ borderRadius: '50%' }}
+  
               />
             }
           >

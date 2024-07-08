@@ -3,5 +3,5 @@ export default interface gameItemModel {
   titleGame : string;
   description: string;
   category?: string;             // жанр игры
-  image?: string;
+  imageId?: string;
 }

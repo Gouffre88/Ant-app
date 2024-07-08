@@ -67,8 +67,9 @@ function GameItemCarousel(props: Props) {
               <img
                 alt={gameItem.titleGame}
                 src={
-                  gameItem.image ||
-                  "https://os.alipayobjects.com/rmsportal/QBnOOoLaAfKPirc.png"
+                  gameItem.imageId
+                    ? `https://localhost:7152/api/storage/${gameItem.imageId}`
+                    : require("../../../Assets/Images/nocontent.png")
                 }
                 style={imageStyle}
               />
