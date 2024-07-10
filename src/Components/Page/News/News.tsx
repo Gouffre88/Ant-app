@@ -12,10 +12,10 @@ const News: React.FC = () => {
         return <MainLoader />;
     }
 
-    const dataSource: newsItemModel[] = data?.$values || [];
-    const tabledata = dataSource.map((item: newsItemModel) => ({ ...item, key: item.id }));
-    const sourcesList = [...new Set(dataSource.map((item: newsItemModel) => item.source))];
-    const gameList = [...new Set(dataSource.map((item: newsItemModel) => item.game))];
+    //const dataSource: newsItemModel[] = data || [];
+    const tabledata = data.map((item: newsItemModel) => ({ ...item, key: item.id }));
+    const sourcesList = [...new Set(data.map((item: newsItemModel) => item.source))];
+    const gameList = [...new Set(data.map((item: newsItemModel) => item.game))];
 
     const sourceFilters = sourcesList.map((source) => ({ text: source as React.ReactNode, value: source as string }));
     const gameFilters = gameList.map((game) => ({ text: game as React.ReactNode, value: game as string }));

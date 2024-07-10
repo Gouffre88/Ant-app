@@ -27,7 +27,7 @@ const GameItemList = () => {
 
   useEffect(() => {
     if (!isLoading && data) {
-      setGameItems(data.$values);
+      setGameItems(data);
     }
   }, [isLoading, data]);
 
@@ -47,7 +47,7 @@ const GameItemList = () => {
         ))}
       </div> }
       <div>
-        {/* <GameItemCarousel gameItem={gameItems} /> */}
+        <GameItemCarousel gameItem={gameItems} />
       </div>
     </div>
   );

@@ -77,7 +77,7 @@ const GameItems = () => {
               Add New Game
             </Button>
           </div>
-          <Table dataSource={data?.$values} columns={columns} rowKey="id" />
+          <Table dataSource={data} columns={columns} rowKey="id" />
         </div>
       )}
     </>
