@@ -18,7 +18,7 @@ function Login() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [userInput, setUserInput] = useState({
-    userName: "",
+    email: "",
     password: "",
   });
 
@@ -31,17 +31,17 @@ function Login() {
     e.preventDefault();
     setLoading(true);
     const response: apiResponse = await loginUser({
-      userName: userInput.userName,
+      email: userInput.email,
       password: userInput.password,
     });
     if (response.data) {
       const { token } = response.data.result;
-      const { fullName, id, email, role }: userModel = jwtDecode(token);
+      const { name, id, email, phoneNumber }: userModel = jwtDecode(token);
       localStorage.setItem("token", token);
-      dispatch(setLoggedInUser({ fullName, id, email, role }));
+      dispatch(setLoggedInUser({ name, id, email, phoneNumber }));
       navigate("/");
     } else if (response.error) {
-      setError(response.error.data.errorMessages[0]);
+      setError(response.error.data.message);
     }
 
     setLoading(false);
@@ -55,9 +55,9 @@ function Login() {
           <h1 className="mt-5">Login</h1>
           <div className="mt-5">
             <Col sm={{ span: 6, offset: 3 }} xs={12} className="mt-4">
-              <Form.Control type="text" placeholder="Enter a name" required
-              name = "userName"
-              value={userInput.userName}
+              <Form.Control type="text" placeholder="Enter a e-mail" required
+              name = "email"
+              value={userInput.email}
               onChange={handleUserInput} />
             </Col>
             <Col sm={{ span: 6, offset: 3 }} xs={12} className="mt-4">

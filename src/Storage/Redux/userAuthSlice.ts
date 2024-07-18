@@ -2,10 +2,12 @@ import {createSlice} from "@reduxjs/toolkit";
 import { userModel } from "../../Interfaces";
 
 export const emptyUserState: userModel = {
-    fullName: "",
-    id: "",
+    id: "", 
+    name: "",   
     email: "",
     role: "",
+    phoneNumber: "",
+
   };
   
   export const userAuthSlice = createSlice({
@@ -13,10 +15,11 @@ export const emptyUserState: userModel = {
     initialState: emptyUserState,
     reducers: {
       setLoggedInUser: (state, action) => {
-        state.fullName = action.payload.fullName;
         state.id = action.payload.id;
         state.email = action.payload.email;
+        state.name = action.payload.name;
         state.role = action.payload.role;
+        state.phoneNumber = action.payload.phoneNumber;
       },
     },
   });

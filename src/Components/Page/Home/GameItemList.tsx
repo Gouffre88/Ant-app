@@ -47,7 +47,7 @@ const GameItemList = () => {
         ))}
       </div> }
       <div>
-        {/* <GameItemCarousel gameItem={gameItems} /> */}
+         <GameItemCarousel gameItem={gameItems} />
       </div>
     </div>
   );

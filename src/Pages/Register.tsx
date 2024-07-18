@@ -14,10 +14,12 @@ function Register() {
     const [registerUser] = useRegisterUserMutation();
     const [loading, setLoading] = useState(false);
     const [userInput, setUserInput] = useState({
-        userName: "",
+        email: "",
+        name: "",
+        phoneNumber: "",
         password: "",
         role: "",
-        name: "",
+      
     });
 
     const handleUserInput = (e: React.ChangeEvent<HTMLInputElement|HTMLSelectElement>) => {
@@ -29,16 +31,18 @@ function Register() {
       e.preventDefault();
       setLoading(true);
       const response: apiResponse = await registerUser({
-        userName: userInput.userName,
+        email: userInput.email,
+        name: userInput.name,
+        phoneNumber: userInput.phoneNumber,
         password: userInput.password,
         role: userInput.role,
-        name: userInput.name,
+        
       });
       if (response.data) {
         toastNotify("Registeration successful! Please login to continue.");
         navigate("/login");
       } else if (response.error) {
-        toastNotify(response.error.data.errorMessages[0], "error");
+        toastNotify(response.error.data.message, "error");
       }
   
       setLoading(false);
@@ -52,10 +56,10 @@ function Register() {
           <Col sm={{ span: 6, offset: 3 }} xs={12} className="mt-4">
               <Form.Control 
                type="text" 
-               placeholder="Enter a userName" 
+               placeholder="Enter a e-mail" 
                required 
-               name="userName"
-               value = {userInput.userName} 
+               name="email"
+               value = {userInput.email} 
                onChange ={(e: React.ChangeEvent<HTMLInputElement>) => handleUserInput(e)}
             />
             </Col>
@@ -69,6 +73,16 @@ function Register() {
                onChange ={(e: React.ChangeEvent<HTMLInputElement>) => handleUserInput(e)}
             />
             </Col>
+            <Col sm={{ span: 6, offset: 3 }} xs={12} className="mt-4">
+              <Form.Control 
+              type="text" 
+              placeholder="Enter phone"
+              required
+              name="phoneNumber"
+              value = {userInput.phoneNumber} 
+              onChange ={(e: React.ChangeEvent<HTMLInputElement>) => handleUserInput(e)}
+            />
+             </Col>
             <Col sm={{ span: 6, offset: 3 }} xs={12} className="mt-4">
               <Form.Control 
               type="text" 

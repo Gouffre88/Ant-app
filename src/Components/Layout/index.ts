@@ -1,4 +1,4 @@
-import Header from "./Header";
+import HeaderComponent from "./Header";
 import Footer  from "./Footer";
 
-export {Header, Footer }
+export {HeaderComponent, Footer }
