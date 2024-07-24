@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Header, Footer } from '../Components/Layout';
+import { HeaderComponent, Footer } from '../Components/Layout';
 import {  GameItemUpsert, GameItems, Home, Login,  NotFound, Register } from '../Pages';
 import { Route, Routes } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
@@ -9,6 +9,7 @@ import { setLoggedInUser } from "../Storage/Redux/userAuthSlice";
 import { jwtDecode } from "jwt-decode";
 import '../dark-theme.css';
 import News from '../Components/Page/News/News';
+//import 'antd/dist/antd.css';
 
 function App() {
   const dispatch = useDispatch();
@@ -26,15 +27,15 @@ function App() {
   useEffect(() => {
     const localToken = localStorage.getItem("token");
     if (localToken) {
-      const { fullName, id, email, role }: userModel = jwtDecode(localToken);
-      dispatch(setLoggedInUser({ fullName, id, email, role }));
+      const { name, id, email, role, phoneNumber }: userModel = jwtDecode(localToken);
+      dispatch(setLoggedInUser({ name, id, email, role, phoneNumber }));
     }
   }, []);
 
   return (
     
     <div>
-      <Header />  
+      <HeaderComponent />  
           <> 
           <Routes>
             <Route path='/' element={<Home />}> </Route>
