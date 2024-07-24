@@ -1,25 +1,104 @@
+// import React, { useState } from 'react';
+// import { Navbar, Container, Nav, } from "react-bootstrap";
+// import NavDropdown from 'react-bootstrap/NavDropdown';
+
+// import { userModel } from '../../Interfaces';
+
+// import { useDispatch, useSelector } from 'react-redux';
+// import { RootState } from "../../Storage/Redux/store";
+
+// import { useNavigate } from 'react-router-dom';
+// import { emptyUserState, setLoggedInUser } from '../../Storage/Redux/userAuthSlice';
+
+
+// let logo = require("../../Assets/Images/logo.png");
+
+// const Header: React.FC = () => {
+//   const dispatch = useDispatch();
+//   const navigate = useNavigate();
+
+//   const userData: userModel = useSelector(
+//     (state: RootState) => state.userAuthStore
+//   );
+
+//   const handleLogout = () => {
+//     localStorage.removeItem("token");
+//     dispatch(setLoggedInUser({ ...emptyUserState }));
+//     navigate("/");
+//   };
+
+//   return (
+//     <div>
+//       <Navbar bg="dark" data-bs-theme="dark" expand="lg">
+//         <Container>
+//           <Nav.Link className="App-link" aria-current="page" href="/">
+//             <img src={logo} style={{ height: '40px' }} className="m-1" title='Home'/>
+//           </Nav.Link>
+//           <Navbar.Brand href="/">CyberTechNet</Navbar.Brand>
+//           <Navbar.Toggle aria-controls="basic-navbar-nav" />
+//           <Navbar.Collapse id="basic-navbar-nav">
+//             <Nav className="me-auto">
+          
+//               <NavDropdown title='AdminPanel' id="basic-nav-dropdown">
+//                 <NavDropdown.Item className="App-link" href="/gameitems">GamesItems</NavDropdown.Item>
+//                 <NavDropdown.Item className="App-link" href="/tournament">Tournament</NavDropdown.Item>
+//               </NavDropdown>
+
+              
+
+//               <Nav.Link className="App-link" href="/hooks">Хуки обычные</Nav.Link>
+//               <Nav.Link className="App-link" href="/mui">MUI</Nav.Link>
+//               <Nav.Link className="App-link" href="/callback">useCallback</Nav.Link>
+//               <Nav.Link className="App-link" href="/custom">Custom hooks</Nav.Link>
+//             </Nav>
+//           </Navbar.Collapse>
+//           <Navbar.Collapse className="justify-content-end">
+//             <Nav className="me-auto">
+//               {userData.id && (
+//                 <NavDropdown title={`Signed in as: ${userData.fullName}`} id="basic-nav-dropdown">
+//                   <NavDropdown.Item onClick={handleLogout}>Logout</NavDropdown.Item>
+//                 </NavDropdown>
+//               )}
+//                {!userData.id && (
+//                 <>
+//                   <Nav.Link className="App-link" href="/login">
+//                     Login
+//                   </Nav.Link>
+//                   <Nav.Link className="App-link" href="/register">
+//                     Register
+//                   </Nav.Link>
+//                 </>
+//                 )}
+//             </Nav>
+//           </Navbar.Collapse>
+//         </Container>
+//       </Navbar>
+//     </div>
+//   );
+// };
+
+// export default Header;
+
 import React, { useState } from 'react';
-import { Navbar, Container, Nav, } from "react-bootstrap";
-import NavDropdown from 'react-bootstrap/NavDropdown';
-
+import { Menu, Image, MenuProps } from 'antd';
+import { AppstoreOutlined, MailOutlined, SettingOutlined } from '@ant-design/icons';
 import { userModel } from '../../Interfaces';
-
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from "../../Storage/Redux/store";
-
 import { useNavigate } from 'react-router-dom';
 import { emptyUserState, setLoggedInUser } from '../../Storage/Redux/userAuthSlice';
+import { Col, Row } from 'antd';
+
 
 
 let logo = require("../../Assets/Images/logo.png");
+type MenuItem = Required<MenuProps>['items'][number];
 
-const Header: React.FC = () => {
+const Header = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-
-  const userData: userModel = useSelector(
-    (state: RootState) => state.userAuthStore
-  );
+  const userData: userModel = useSelector((state: RootState) => state.userAuthStore);
+  const [current, setCurrent] = useState('home');
 
   const handleLogout = () => {
     localStorage.removeItem("token");
@@ -27,54 +106,116 @@ const Header: React.FC = () => {
     navigate("/");
   };
 
-  return (
-    <div>
-      <Navbar bg="dark" data-bs-theme="dark" expand="lg">
-        <Container>
-          <Nav.Link className="App-link" aria-current="page" href="/">
-            <img src={logo} style={{ height: '40px' }} className="m-1" title='Home'/>
-          </Nav.Link>
-          <Navbar.Brand href="/">CyberTechNet</Navbar.Brand>
-          <Navbar.Toggle aria-controls="basic-navbar-nav" />
-          <Navbar.Collapse id="basic-navbar-nav">
-            <Nav className="me-auto">
-          
-              <NavDropdown title='AdminPanel' id="basic-nav-dropdown">
-                <NavDropdown.Item className="App-link" href="/gameitems">GamesItems</NavDropdown.Item>
-                <NavDropdown.Item className="App-link" href="/tournament">Tournament</NavDropdown.Item>
-              </NavDropdown>
+  const items: MenuItem[] = [
+    {
+      label: (
+        <Image
+          width={40}
+          src={logo}
+          alt="logo"
+          title="Home"
+        />
+      ),
+      key: 'home',
+    },
+    {
+      label: 'CyberTechNet',
+      key: 'brand',
+    },
+    {
+      label: 'AdminPanel',
+      key: 'admin',
+      children: [
+        {
+          label: 'GamesItems',
+          key: 'gameitems',
+        },
+        {
+          label: 'Tournament',
+          key: 'tournament',
+        },
+      ],
+    },
+    {
+      label: 'Хуки обычные',
+      key: 'hooks',
+    },
+    {
+      label: 'MUI',
+      key: 'mui',
+    },
+    {
+      label: 'useCallback',
+      key: 'callback',
+    },
+    {
+      label: 'Custom hooks',
+      key: 'custom',
+    },
+  ];
 
-              
+//   if (userData.id) {
+//     items.push({
+//       label: 'Signed in as: ${ userData.fullName }',
+//       key: 'profile',
+//       children: [
+//       {
+//         label: 'Logout',
+//         key: 'logout',
+//         onClick: handleLogout,
+//       },
+//     ],
+//   });
+//   } else {
+//     items.push({
+//       label: 'Login',
+//       key: 'login',
 
-              <Nav.Link className="App-link" href="/hooks">Хуки обычные</Nav.Link>
-              <Nav.Link className="App-link" href="/mui">MUI</Nav.Link>
-              <Nav.Link className="App-link" href="/callback">useCallback</Nav.Link>
-              <Nav.Link className="App-link" href="/custom">Custom hooks</Nav.Link>
-            </Nav>
-          </Navbar.Collapse>
-          <Navbar.Collapse className="justify-content-end">
-            <Nav className="me-auto">
-              {userData.id && (
-                <NavDropdown title={`Signed in as: ${userData.fullName}`} id="basic-nav-dropdown">
-                  <NavDropdown.Item onClick={handleLogout}>Logout</NavDropdown.Item>
-                </NavDropdown>
-              )}
-               {!userData.id && (
-                <>
-                  <Nav.Link className="App-link" href="/login">
-                    Login
-                  </Nav.Link>
-                  <Nav.Link className="App-link" href="/register">
-                    Register
-                  </Nav.Link>
-                </>
-                )}
-            </Nav>
-          </Navbar.Collapse>
-        </Container>
-      </Navbar>
-    </div>
-  );
+//     });
+//     items.push({
+//       label: 'Register',
+//       key: 'register',
+//     });
+//  }
+
+
+
+const loginItems: MenuItem[] = [
+  {
+    label: 'Login',
+    key: 'login',
+  },
+
+  {
+    label: 'Register',
+    key: 'register',
+  },
+]
+
+const onClick: MenuProps['onClick'] = (e) => {
+  console.log('click ', e);
+  setCurrent(e.key);
+};
+
+    return (
+      <div >
+        <Menu theme='dark' onClick={onClick} selectedKeys={[current]} mode="horizontal" style={{ display: 'flex', justifyContent: 'right'}} items={loginItems} />
+       {/* <Row >
+        <Col >
+          <Menu theme='dark' onClick={onClick} selectedKeys={[current]}  mode="horizontal" items={items}  />
+        </Col>
+        <Col >
+           
+        </Col>        
+        </Row> */}
+     </div>
+    
+
+     
+    );
 };
 
 export default Header;
+
+
+// // style={{ display: 'flex', justifyContent: 'left', flexWrap: 'wrap', gap: '32px' }}
