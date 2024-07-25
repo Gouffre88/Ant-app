@@ -68,7 +68,7 @@ function GameItemCarousel(props: Props) {
                 alt={gameItem.titleGame}
                 src={
                   gameItem.imageId
-                    ? `http://asutp-web-001:7152/api/storage/${gameItem.imageId}`
+                    ? `https://localhost:7152/api/storage/${gameItem.imageId}`
                     : require("../../../Assets/Images/nocontent.png")
                 }
                 style={imageStyle}

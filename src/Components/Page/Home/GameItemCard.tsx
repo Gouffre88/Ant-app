@@ -36,7 +36,7 @@ import { Card } from "antd";
             cover={
               <img
                 alt="example"
-                src={props.gameItem.imageId ? `http://asutp-web-001:7152/api/storage/${props.gameItem.imageId}`
+                src={props.gameItem.imageId ? `https://localhost:7152/api/storage/${props.gameItem.imageId}`
                 : require("../../../Assets/Images/nocontent.png")}
                // style={{ borderRadius: '50%' }}
   
