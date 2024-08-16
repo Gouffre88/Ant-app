@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { HeaderComponent, Footer } from '../Components/Layout';
-import { GameItems, Home, Login,  NotFound, Register } from '../Pages';
+import { TournamentMeetTeam, TournamentMeet, TeamPlayer, Info, Teams, Players, Countries, Tournament, GameItems, Home, Login,  NotFound, Register } from '../Pages';
 import { Route, Routes } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../Storage/Redux/store';
@@ -40,6 +40,14 @@ function App() {
           <Routes>
             <Route path='/' element={<Home />}> </Route>
             <Route path='/gameItems' element ={<GameItems/>}> </Route>
+            <Route path='/tournament' element ={<Tournament/>}> </Route>
+            <Route path='/countries' element ={<Countries/>}> </Route>
+            <Route path='/players' element ={<Players/>}> </Route>
+            <Route path='/teams' element ={<Teams/>}> </Route>
+            <Route path='/teamplayer' element ={<TeamPlayer/>}> </Route>
+            <Route path='/info' element ={<Info/>}> </Route>
+            <Route path='/TournamentMeet' element ={<TournamentMeet/>}> </Route>
+            <Route path='/TournamentMeetTeam' element ={<TournamentMeetTeam/>}> </Route>
 
     
 

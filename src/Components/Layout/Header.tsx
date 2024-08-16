@@ -163,6 +163,34 @@ const Header = () => {
           label: 'Tournament',
           key: 'tournament',
         },
+        {
+          label: 'Countries',
+          key: 'countries',
+        },
+        {
+          label: 'Players',
+          key: 'players',
+        },
+        {
+          label: 'Teams',
+          key: 'teams',
+        },
+        {
+          label: 'TeamPlayer',
+          key: 'teamplayer'
+        },
+        {
+          label: 'Info',
+          key: 'info',
+        },
+        {
+          label: 'TournamentMeet',
+          key: 'tournamentmeet',
+        },
+        {
+          label: 'TournamentMeetTeam',
+          key: 'tournamentmeetteam',
+        },
       ],
     },
     {
@@ -241,6 +269,13 @@ const onClick: MenuProps['onClick'] = (e) => {
               <NavDropdown title='AdminPanel' id="basic-nav-dropdown">
                 <NavDropdown.Item className="App-link" href="/gameitems">GamesItems</NavDropdown.Item>
                 <NavDropdown.Item className="App-link" href="/tournament">Tournament</NavDropdown.Item>
+                <NavDropdown.Item className="App-link" href="/countries">Countries</NavDropdown.Item>
+                <NavDropdown.Item className="App-link" href="/players">Players</NavDropdown.Item>
+                <NavDropdown.Item className="App-link" href="/teams">Teams</NavDropdown.Item>
+                <NavDropdown.Item className="App-link" href="/teamplayer">TeamPlayer</NavDropdown.Item>
+                <NavDropdown.Item className="App-link" href="/info">Info</NavDropdown.Item>
+                <NavDropdown.Item className="App-link" href="/tournamentmeet">TournamentMeet</NavDropdown.Item>
+                <NavDropdown.Item className="App-link" href="/tournamentmeetteam">TournamentMeetTeam</NavDropdown.Item>
               </NavDropdown>
 
               

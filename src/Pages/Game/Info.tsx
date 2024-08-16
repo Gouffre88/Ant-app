@@ -2,15 +2,15 @@ import React, { useState } from 'react';
 import { Table, Button, Image, Modal, Form, Input, Select } from 'antd';
 import { PlusOutlined, EditOutlined, DeleteOutlined } from '@ant-design/icons';
 import { 
-  useGetGameItemsQuery, 
-  useDeleteGameItemMutation,
-  useCreateGameItemMutation,
-  useUpdateGameItemMutation
-} from '../../Api/gameItemApi';
-import gameItemModel from '../../Interfaces/gameItemModel';
+  useGetInfoQuery, 
+  useDeleteInfoMutation,
+  useCreateInfoMutation,
+  useUpdateInfoMutation
+} from '../../Api/InfoApi';
+import InfoModel from '../../Interfaces/InfoModel';
 import { MainLoader } from '../../Components/Page/Common';
 import { useDispatch } from 'react-redux';
-import { setGameItem } from '../../Storage/Redux/gameItemSlice';
+import { setNewsItem } from '../../Storage/Redux/newsItemSlice';
 import ImageUploader from '../../Components/Page/Common/ImageUploader';
 import { toastNotify } from '../../Helper';
 import { toast } from 'react-toastify';
@@ -19,16 +19,16 @@ import { ButtonGroup } from 'react-bootstrap';
 
 const { Option } = Select;
 
-const GameItems: React.FC = () => {
-  const [form] = Form.useForm<gameItemModel>();
+const Info: React.FC = () => {
+  const [form] = Form.useForm<InfoModel>();
   const [isModalVisible, setIsModalVisible] = useState<boolean>(false);
-  const [editingItem, setEditingItem] = useState<gameItemModel | null>(null);
+  const [editingItem, setEditingItem] = useState<InfoModel | null>(null);
 
   const dispatch = useDispatch();
-  const [deleteGameItem] = useDeleteGameItemMutation();
-  const [createGameItem] = useCreateGameItemMutation();
-  const [updateGameItem] = useUpdateGameItemMutation();
-  const { data, isLoading, refetch } = useGetGameItemsQuery(null);
+  const [deleteInfo] = useDeleteInfoMutation();
+  const [createInfo] = useCreateInfoMutation();
+  const [updateInfo] = useUpdateInfoMutation();
+  const { data, isLoading, refetch } = useGetInfoQuery(null);
 
 // for img
   const [imageId, setImageId] = useState<string | null>(null);
@@ -40,12 +40,12 @@ const GameItems: React.FC = () => {
   };
   //
 
-  const handleGameItemDelete = async (id: string) => {
+  const handleInfoDelete = async (id: string) => {
     toast.promise(
-      deleteGameItem(id),
+      deleteInfo(id),
       {
         pending: 'Processing your request...',
-        success: 'Game has been deleted Successfully 👌',
+        success: 'Info has been deleted Successfully 👌',
         error: 'Error encountered 🤯',
       },
       {
@@ -54,7 +54,7 @@ const GameItems: React.FC = () => {
     );
   };
 
-  const showModal = (item: gameItemModel | null = null) => {
+  const showModal = (item: InfoModel | null = null) => {
     setEditingItem(item);
     form.setFieldsValue(item || {});
     setIsModalVisible(true);
@@ -66,14 +66,14 @@ const GameItems: React.FC = () => {
     setEditingItem(null);
   };
 
-  const onFinish = async (values: gameItemModel) => {
+  const onFinish = async (values: InfoModel) => {
     try {
       if (editingItem) {
-        await updateGameItem({ data: values, id: editingItem.id }).unwrap();
-        toastNotify('Game updated successfully');    
+        await updateInfo({ data: values, id: editingItem.id }).unwrap();
+        toastNotify('Information updated successfully');    
       } else {
-        await createGameItem(values).unwrap();
-        toastNotify('Game created successfully');
+        await createInfo(values).unwrap();
+        toastNotify('Information created successfully');
       }
       setIsModalVisible(false);
       form.resetFields();
@@ -81,7 +81,7 @@ const GameItems: React.FC = () => {
       // Refresh the data
       const updatedData = await refetch();
       if (updatedData.data) {
-        dispatch(setGameItem(updatedData.data));
+        dispatch(setNewsItem(updatedData.data));
       }
     } catch (error) {
       toastNotify('An error occurred',"error");
@@ -90,9 +90,9 @@ const GameItems: React.FC = () => {
 
   const columns = [
     {
-      title: 'ID',
-      dataIndex: 'id',
-      key: 'id',
+        title: 'ID',
+        dataIndex: 'id',
+        key: 'id',
     },
     {
       title: 'Image',
@@ -105,28 +105,28 @@ const GameItems: React.FC = () => {
           style={{ width: '100%', maxWidth: '120px' }} />,
     },
     {
-      title: 'Name',
-      dataIndex: 'titleGame',
-      key: 'titleGame',
+      title: 'Title information',
+      dataIndex: 'titleInfo',
+      key: 'titleInfo',
     },
     {
-      title: 'Description',
-      dataIndex: 'description',
-      key: 'description',
+      title: ' Text information',
+      dataIndex: 'textInfo',
+      key: 'textInfo',
     },
     {
-      title: 'Category',
-      dataIndex: 'category',
-      key: 'category',
+      title: 'Date',
+      dataIndex: 'dataInfo',
+      key: 'dataInfo',
     },
     {
       title: 'Action',
       key: 'action',
-      render: (_: any, record: gameItemModel) => (
+      render: (_: any, record: InfoModel) => (
         <>
         <ButtonGroup aria-label="Basic example">
           <Button type="primary" shape="circle" icon={<EditOutlined />} onClick={() => showModal(record)} />
-          <Button type="primary" danger shape="circle" icon={<DeleteOutlined />} className="mx-2" onClick={() => handleGameItemDelete(record.id)} />
+          <Button type="primary" danger shape="circle" icon={<DeleteOutlined />} className="mx-2" onClick={() => handleInfoDelete(record.id)} />
         </ButtonGroup>
         </>
       ),
@@ -140,32 +140,27 @@ const GameItems: React.FC = () => {
       ) : (
         <div className="p-5">
           <div className="d-flex align-items-center justify-content-between mb-4">
-            <h1 className="text-success">List of Games</h1>
+            <h1 className="text-success">List of information</h1>
             <Button type="primary" icon={<PlusOutlined />} onClick={() => showModal()}>
-              Add new game
+              Add information
             </Button>
           </div>
           <Table dataSource={data} columns={columns} rowKey="id" />
           <Modal
-            title={editingItem ? "Edit game" : "Add new game"}
+            title={editingItem ? "Edit information" : "Add new information"}
             open={isModalVisible}
             onCancel={handleCancel}
             footer={null}
           >
-          <Form<gameItemModel> form={form} onFinish={onFinish} layout="vertical">
-              <Form.Item name="titleGame" label="Name" rules={[{ required: true }]}>
+          <Form<InfoModel> form={form} onFinish={onFinish} layout="vertical">
+              <Form.Item name="titleInfo" label="Title information" rules={[{ required: true }]}>
                 <Input />
               </Form.Item>
-              <Form.Item name="description" label="Description" rules={[{ required: true }]}>
-                <Input.TextArea />
+              <Form.Item name="textInfo" label="Text information" rules={[{ required: true }]}>
+                <Input />
               </Form.Item>
-              <Form.Item name="category" label="Category">
-                <Select>
-                  <Option key="id-tournament" value="action">Action</Option>
-                  <Option value="adventure">Adventure</Option>
-                  <Option value="strategy">Strategy</Option>
-                  {/* Add more */}
-                </Select>
+              <Form.Item name="dataInfo" label="Date" rules={[{ required: true }]}>
+                <Input type='date'/>
               </Form.Item>
               <Form.Item name="imageId" label="Image ID">
                 <Input />
@@ -185,4 +180,4 @@ const GameItems: React.FC = () => {
   );
 };
 
-export default GameItems;
+export default Info;
